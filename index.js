@@ -61,6 +61,30 @@ app.get("/post", async (req,res) => {
     }
 })
 
+async function deletePost(postId) {
+    try {
+        const post = await Posting.findByIdAndDelete(postId)
+        return post
+    } catch (error) {
+        throw error
+    }
+
+}
+
+app.delete("/task/:id", async (req,res) => {
+    try {
+        const data = await deletePost(req.params.id)
+        if(data){
+            res.status(200).json({message:"Post deletd successfully."})
+        }
+        else{
+            res.status(404).json({error:"post not deleted."})
+        }        
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+})
+
 const PORT = 3000 || process.env.PORT
 
 app.listen(PORT,()=>{
