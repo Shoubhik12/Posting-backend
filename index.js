@@ -71,7 +71,7 @@ async function deletePost(postId) {
 
 }
 
-app.delete("/task/:id", async (req,res) => {
+app.delete("/post/:id", async (req,res) => {
     try {
         const data = await deletePost(req.params.id)
         if(data){
